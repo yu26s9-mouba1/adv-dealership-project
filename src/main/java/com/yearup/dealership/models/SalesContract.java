@@ -8,9 +8,11 @@ public class SalesContract extends Contract {
 
 
     public SalesContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicle, double totalPrice, double monthlyPayment, boolean isFinance) {
-        super(dateOfContract, customerName, customerEmail, vehicle, totalPrice, monthlyPayment);
+        super(dateOfContract, customerName, customerEmail, vehicle);
         this.isFinance = isFinance;
     }
+
+//    , totalPrice, monthlyPayment
 
     public double getSalesAmount() {
         return salesAmount;
@@ -36,7 +38,7 @@ public class SalesContract extends Contract {
         double salesTax = vehiclePrice * salesAmount;
 
 
-        //Calculating the processing fees based on contract type 
+        //Calculating the processing fees based on contract type
         double processingFee;
             if(vehiclePrice < 1000) {
                 processingFee = 295;
