@@ -1,7 +1,11 @@
 package com.yearup.dealership.ui;
 import com.yearup.dealership.data.DealershipFileManager;
+import com.yearup.dealership.data.ContractFileManager;
+import com.yearup.dealership.models.Contract;
 import com.yearup.dealership.models.Dealership;
+import com.yearup.dealership.models.SalesContract;
 import com.yearup.dealership.models.Vehicle;
+import com.yearup.dealership.models.LeaseContract;
 
 import java.util.ArrayList;
 
@@ -12,6 +16,58 @@ public class UserInterface {
     public UserInterface() {
 
     }
+
+    private void processContract() {
+
+        int vin = Console.promptForInt("Please enter the vin");
+
+        //Find vehicle by Vin
+        Vehicle vehicle = dealership.getVehicleByVin(vin);
+
+        if  (vehicle == null) {
+            System.out.println("Vehicle Not Found");
+            return;
+        }
+
+        System.out.println("1- Sale");
+        System.out.println("2- Lease");
+
+        int choice = Console.promptForInt("Choose Contract Type: ");
+
+        //Prompting for customer info
+        String date = Console.promptForString("Enter date: ");
+        String name = Console.promptForString("Enter name: ");
+        String email = Console.promptForString("Enter email: ");
+
+        Contract contract = null;
+
+        if (choice == 1) {
+            boolean isFinance = Console.promptForString("Finance? Yes/No: ").equalsIgnoreCase("Yes");
+
+            contract = new SalesContract(date, name, email, vehicle, isFinance);
+        } else if (choice == 2) {
+            contract = new LeaseContract(date, name, email, vehicle);
+
+        }else{
+            System.out.println("Invalid Choice");
+            return;
+        }
+
+       //Saving the contract to the dealership data/file
+        ContractFileManager contractFileManager = new ContractFileManager();
+        contractFileManager.saveContract(contract);
+
+        dealership.removeVehicle(vehicle);
+
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
+        dealershipFileManager.saveDealership(dealership);
+
+        System.out.println("Contract saved successfully.");
+
+    }
+
+
+
 
 
     /**
@@ -42,6 +98,7 @@ public class UserInterface {
                     7 - List all vehicles
                     8 - Add vehicle
                     9 - Remove vehicle
+                    10- Sell/Lease vehicle
                     99 - Quit
                     
                     
@@ -79,6 +136,10 @@ public class UserInterface {
                 case "9":
                     processRemoveVehicleRequest();
                     break;
+                case "10":
+                    processContract();
+                    break;
+
                 case "99":
                     System.out.println("Goodbye!");
                     ;
@@ -263,6 +324,44 @@ public class UserInterface {
 
 
     }
+
+
+
+
+//    public void processSellLeaseVehicle() {
+//
+//        int Vin = Console.promptForInt("Enter Vin: ");
+//        ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
+//        Vehicle vehicleToSell = null;
+//        for (Vehicle vehicle : vehicles) {
+//            if (vehicle.getVin() == Vin) {
+//                vehicleToSell = vehicle;
+//                break;
+//
+//            }
+//        }
+//
+//
+//        if (vehicleToSell != null) {
+//            do {
+//                String contract = ("""
+//                        1- Sales Contract
+//                        2- Lease COntract
+//
+//                        """);
+//
+//
+//                System.out.println(contract);
+//                String command = Console.promptForString("Enter Command: ");
+//                switch (command) {
+//                    case "1":
+//                }
+//            }
+//        }
+//
+//
+//    }
+
 
 
 }

@@ -1,12 +1,10 @@
 package com.yearup.dealership.models;
-
 import java.util.ArrayList;
 
 
 /**
  * Dealership class to store all dealership infos
  */
-
 public class Dealership {
 
     private String name;
@@ -38,11 +36,12 @@ public class Dealership {
     }
 
 
-    // A method to call all vehicle in the arraylist
+    // Calling vehicles from the arraylist
     public ArrayList<Vehicle> getAllVehicles() {
         return inventory;
     }
 
+    //Calling vehicles by make or model
     public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory) {
@@ -55,7 +54,7 @@ public class Dealership {
     }
 
 
-
+   //Calling vehicles by price
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
         ArrayList<Vehicle> matchingVehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory) {
@@ -68,6 +67,8 @@ public class Dealership {
 
     }
 
+
+    //Calling vehicles by year
     public ArrayList<Vehicle> getVehiclesByYear(int minYear, int maxYear) {
         ArrayList<Vehicle> matchingVehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory) {
@@ -79,6 +80,8 @@ public class Dealership {
         return matchingVehicles;
     }
 
+
+    //Calling vehicles by Color
     public ArrayList<Vehicle> getVehiclesByColor(String color) {
         ArrayList<Vehicle> matchingVehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory) {
@@ -90,7 +93,7 @@ public class Dealership {
     }
 
 
-
+    //Calling vehicles by Odometer
     public ArrayList<Vehicle> getVehiclesByOdometer(int minOdometer, int maxOdometer) {
         ArrayList<Vehicle> matchingVehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory) {
@@ -103,6 +106,8 @@ public class Dealership {
         return matchingVehicles;
     }
 
+
+    //Calling vehicles by Type
     public ArrayList<Vehicle> getVehiclesByType(String type) {
         ArrayList<Vehicle> matchingVehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory) {
@@ -113,12 +118,22 @@ public class Dealership {
         return matchingVehicles;
     }
 
-    //A method to add vehicles to the arrayList
+    //Get Vehicle By Vin number
+    public Vehicle getVehicleByVin(int vin) {
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVin() == vin) {
+                return vehicle;
+            }
+        }
+        return null;
+    }
+
+    //Adds vehicles to the arrayList
     public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
     }
 
-    // A method to remove vehicle
+    // Removes vehicles
     public void removeVehicle(Vehicle vehicle) {
         inventory.remove(vehicle);
     }

@@ -6,7 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 
 
@@ -85,10 +85,8 @@ public class DealershipFileManager {
             BufferedWriter bw = new BufferedWriter(new FileWriter(PRODUCT_FILE));
 
             // Write vehicle information first line\tittle:
-            bw.write(
-                    dealership.getName() + "|" +
-                            dealership.getAddress() + "|" +
-                            dealership.getPhone()
+            bw.write (dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone()
+
             );
 
 
@@ -98,16 +96,16 @@ public class DealershipFileManager {
             for (Vehicle vehicle : dealership.getAllVehicles()) {
 
                 // Writes each vehicle in pipe format
-                bw.write(
-                        vehicle.getVin() + "|" +
-                                vehicle.getYear() + "|" +
-                                vehicle.getMake() + "|" +
-                                vehicle.getModel() + "|" +
-                                vehicle.getVehicleType() + "|" +
-                                vehicle.getColor() + "|" +
-                                vehicle.getOdometer() + "|" +
+               bw.write(
+                      vehicle.getVin() + "|" +
+                             vehicle.getYear() + "|" +
+                              vehicle.getMake() + "|" +
+                              vehicle.getModel() + "|" +
+                              vehicle.getVehicleType() + "|" +
+                               vehicle.getColor() + "|" +
+                              vehicle.getOdometer() + "|" +
                                 vehicle.getPrice()
-                );
+               );
 
 
                 bw.newLine();

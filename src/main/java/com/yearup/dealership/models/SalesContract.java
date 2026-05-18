@@ -7,12 +7,27 @@ public class SalesContract extends Contract {
     private final boolean isFinance;
 
 
-    public SalesContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicle, double totalPrice, double monthlyPayment, boolean isFinance) {
+    public SalesContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicle, boolean isFinance) {
         super(dateOfContract, customerName, customerEmail, vehicle);
         this.isFinance = isFinance;
     }
 
-//    , totalPrice, monthlyPayment
+
+    //Calculates the processing fee
+    public double getProcessingFee(){
+        double vehiclePrice = getVehicleSold().getPrice();
+
+        if(isFinance){
+            if (vehiclePrice < 10000){
+                return 295;
+            } else {
+                return 495;
+            }
+        }
+        return 0;
+    }
+
+
 
     public double getSalesAmount() {
         return salesAmount;

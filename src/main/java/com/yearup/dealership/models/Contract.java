@@ -1,4 +1,6 @@
 package com.yearup.dealership.models;
+import com.yearup.dealership.models.SalesContract;
+import com.yearup.dealership.models.Contract;
 
 public abstract class Contract {
 
